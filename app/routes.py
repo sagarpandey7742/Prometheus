@@ -40,10 +40,8 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            flash("Welcome " + form.email.data + "  :)", 'success')
-            flash("Your username is " + user.username, 'success')
-            flash("Your hashed password is " + user.password, 'success')
-            return redirect(url_for('home'))
+            flash("Welcome Back!!", 'success')
+            return render_template('home.html', username=user.username, email=user.email, hashed_password=user.password)
         else:
             flash("Invalid email or password", 'danger')
     return render_template('login.html', title='Prometheus | Login', form=form)
@@ -52,4 +50,5 @@ def login():
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
+    flash("Logged Out Successfully", 'info')
     return redirect(url_for('login'))
