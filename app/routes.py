@@ -8,6 +8,7 @@ with app.app_context():
     db.create_all()
 
 
+@login_required
 @app.route('/')
 @app.route('/home')
 def home():

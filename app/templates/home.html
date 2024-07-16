@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    Hola! Your Deatails are: <br>
-    Username: {{ username }}<br>
-    Email: {{ email }} <br>
-    Hashed Password: {{ hashed_password }}
+    {% if current_user.is_authenticated %}
+        Hola! Your Details are: <br>
+        Username: {{ username }}<br>
+        Email: {{ email }} <br>
+        Hashed Password: {{ hashed_password }}
+    {% else %}
+        <h5>Please Login!!</h5>
+    {% endif %}
 {% endblock content %}
