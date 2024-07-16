@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from app.forms import SignUpForm, LoginForm
 from app.models import User
 from app import app, db, bcrypt
+from flask_login import login_user, current_user, logout_user, login_required
 
 with app.app_context():
     db.create_all()
@@ -19,6 +20,8 @@ def about():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = SignUpForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -34,11 +37,23 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        flash("Welcome " + form.email.data + "  :)", 'success')
-        return redirect(url_for('home'))
-    elif request.method == 'POST':
-        flash("Invalid username or password", 'danger')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            flash("Welcome " + form.email.data + "  :)", 'success')
+            return redirect(url_for('home'))
+        else:
+            flash("Invalid email or password", 'danger')
     return render_template('login.html', title='Prometheus | Login', form=form)
+
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
