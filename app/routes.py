@@ -7,15 +7,11 @@ from flask_login import login_user, current_user, logout_user, login_required
 with app.app_context():
     db.create_all()
 
+
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('home.html')
-
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -45,15 +41,15 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash("Welcome " + form.email.data + "  :)", 'success')
+            flash("Your username is " + user.username, 'success')
+            flash("Your hashed password is " + user.password, 'success')
             return redirect(url_for('home'))
         else:
             flash("Invalid email or password", 'danger')
     return render_template('login.html', title='Prometheus | Login', form=form)
 
 
-
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
