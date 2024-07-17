@@ -27,12 +27,12 @@ Open [http://127.0.0.1:5000](http://127.0.0.1:5000) to view it in the browser.
 
 ### Screens
 
-![alt text](https://ibb.co/SJZ2hwJ)
+https://ibb.co/SJZ2hwJ
 
-![alt text](https://ibb.co/f4sW02B)
+https://ibb.co/f4sW02B
 
-![alt text](https://ibb.co/9NySLr7)
+https://ibb.co/9NySLr7
 
-![alt text](https://ibb.co/7gLnT29)
+https://ibb.co/7gLnT29
 
-![alt text](https://ibb.co/mvw2HKJ)
+https://ibb.co/mvw2HKJ
