@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
     {% if current_user.is_authenticated %}
-        Hola! Your Details are: <br>
-        Username: {{ username }}<br>
-        Email: {{ email }} <br>
-        Hashed Password: {{ hashed_password }}
+        <div class="">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Hola! Your Details are:</li>
+                    <li class="list-group-item">Username: {{ username }}</li>
+                    <li class="list-group-item">Email: {{ email }}</li>
+                    <li class="list-group-item">Hashed Password: {{ hashed_password }}</li>
+                </ul>
+            </div>
+        </div>
     {% else %}
         <h5>Please Login!!</h5>
     {% endif %}
