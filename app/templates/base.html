@@ -22,13 +22,13 @@
         <a class="navbar-brand">XLRI</a>
         <form class="form-inline" method="POST">
             {% if current_user.is_authenticated %}
-            <a href="{{ url_for('logout') }}">
-                Logout
-            </a>
+                <a href="{{ url_for('logout') }}">
+                    Logout
+                </a>
             {% else %}
-            <a href="{{ url_for('login') }}">
-                Login
-            </a>
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
             {% endif %}
         </form>
     </nav>
